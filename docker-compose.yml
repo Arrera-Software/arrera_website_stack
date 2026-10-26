@@ -46,6 +46,15 @@ services:
       - ./librairy-website:/var/www/html:Z
     depends_on:
       - db
+  
+  web-mirror-bluos:
+    image: docker.io/library/httpd:alpine
+    container_name: web-mirror-bluos
+    ports:
+      - "8083:80"
+    volumes:
+      - ./blue_os/directory:/usr/local/apache2/htdocs/pub:ro,z
+    restart: unless-stopped
 
 volumes:
   db_data:
